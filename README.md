@@ -1,2 +1,1 @@
-# nikhildinpure.github.io
-Testing a static project hosting on github
+Adding Content in txt
