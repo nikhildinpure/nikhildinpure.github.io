@@ -1,0 +1,536 @@
+
+
+<!DOCTYPE html>
+<html ng-app="myAdmin">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>admin</title>
+<link rel="icon" type="image/gif/png" href="">
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<style>
+.active-nav{
+	background-color:gray;
+	border-bottom:solid 1px orange;
+}
+
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+	
+	border-bottom: 1px solid #dddddd;
+}
+
+</style>
+<body id="admin" layout="column"   ng-controller="adminCtrl" ng-cloak> 
+<section layout="row" flex>
+	<md-sidenav
+        class="md-sidenav-left"
+        md-component-id="left"
+        md-is-locked-open="$mdMedia('gt-xs')"
+        md-whiteframe="4">
+		
+	<md-toolbar class="" >
+      <div layout="row" class="inset">
+        <md-toolbar-filler layout="row" layout-align="center center">
+          <img ng-src="GGlogo.png" style="border-radius :50px"   alt="logo" />
+        </md-toolbar-filler>
+        <h2 class="md-toolbar-tools">
+          <span>Menu</span>
+        </h2>
+      </div>
+    </md-toolbar>
+		
+      <md-content >
+	  <md-list flex >
+		<md-list-item  class="md-2-line " ng-repeat="item in data.adminMenu track by $index " ng-click="viewSelected(item,$index);" >
+			<i class="md-avatar {{item.menuIcon}}" ng-style="{'font-size':'36px'}"></i>
+          <!-- <img ng-src="{{item.face}}?{{$index}}" class="md-avatar" alt="{{item.menuId}}" /> -->
+          <div class="md-list-item-text" layout="column">
+            <a >{{ item.menuName }} </a>
+            
+			  </div>
+			  <md-divider md-inset hide-sm ></md-divider>
+               <md-divider hide-gt-sm ng-if="!$last"></md-divider>
+			</md-list-item>
+		</md-list>
+		<md-divider ></md-divider>
+		  <a title="Nikhil Inpure" href="#" ng-style="{'font-size':'12px'}">developed and maintained by Guidance Educon Pvt. Ltd.</a>
+		  <br><br>
+      </md-content>
+		
+    </md-sidenav>
+	
+	<md-content layout="column" layout-xs="row" flex  md-swipe-right="onSwipeRight($event, $target)">
+		<md-tabs md-dynamic-height md-border-bottom md-selected="selectedTab" >
+		
+		
+		  <md-tab label="View Records" >
+			<md-content class="md-padding" >
+				<div layout="row" layout-align="end end">
+			 	 <h1 class="md-display-2" flex>{{activeMenu}}</h1>
+			 	 
+			 	 <md-input-container class="md-icon-float md-block">
+			      <!-- Use floating label instead of placeholder -->
+			      <label>Quick Search</label>
+			      <md-icon ><i class="md-avatar fa fa-search" ng-style="{'font-size':'24px','color':'green'}"></i></md-icon>
+			      <input ng-model="searchKey" type="text">
+			    </md-input-container>
+			 	 
+			  </div>
+			  <md-card  >
+					 <md-card-content>
+					
+					   <table>
+						<tr >
+							<th ng-repeat="header in headerList track by $index">{{header}}</th>
+							<th><i class="md-avatar fa fa-pencil " ng-style="{'font-size':'24px'}" ></i></th>
+							<th><i class="md-avatar fa fa-trash " ng-style="{'font-size':'24px'}" ></i></th>
+							
+						 </tr>
+						 <tr ng-repeat="recs in containList| filter:searchKey">
+							<td ng-repeat="rec in recs track by $index" ng-init="tp=detectType(rec);subtp=detectType(rec[0]);">
+								<span ng-if="tp=='[object String]' || tp == '[object Number]' || tp == '[object Boolean]' ">
+									{{rec}} 
+								</span>
+								<span ng-if="tp=='[object Array]' && subtp=='[object String]' ">
+									<p ng-repeat="subRec in rec track by $index">{{subRec}}</p>
+								</span>
+							</td>
+							<td><a   class="md-avatar fa fa-pencil " ng-style="{'font-size':'24px','color':'navy','cursor':'pointer'}"  
+										 ng-click="editRecord($index);"></a>
+							</td>
+							<td><a   class="md-avatar fa fa-trash " ng-style="{'font-size':'24px','color':'red','cursor':'pointer'}"  
+										 ng-click="deleteRecord($index);"></a>
+							</td>
+							
+							
+						 </tr>
+					   </table>
+					 </md-card-content>
+					 <md-card-footer>
+					   <md-button class="md-raised md-cornered md-primary" ng-click="viewSelected(selectedMenu,selectedMenuIndex);">Refresh Records</md-button> 
+					 </md-card-footer>
+			</md-card>
+			  
+			</md-content>
+		  </md-tab>
+		  
+		  <md-tab label="Add Records" ng-click="resetMode();">
+			<md-content class="md-padding">
+			  <h1 class="md-display-2">{{activeMenu}}</h1>
+					<md-card >
+					 <md-card-content>
+						<form  ng-submit="addRecord();">
+							<md-input-container class="md-block" flex-gt-sm ng-repeat="fields in fieldList track by $index"  
+								ng-if="fields.fieldType !='[object Array]'" >
+							
+								<label>{{fields.fieldName}} </label>
+								<input  ng-model="dynamicModel[fields.fieldName]" required>
+								
+							</md-input-container >
+							
+							
+							<md-input-container ng-if="enableChip" class="md-block" flex-gt-sm ng-repeat="chip in chipList track by $index" >
+							
+								<label>{{chip}} </label>
+								<textarea  ng-model="dynamicModel[chip]"  rows="5" md-select-on-focus required></textarea>
+								<p  class="hint" >Press enter to Separate your input</p>
+								
+							</md-input-container >
+							
+							<md-button type="submit" class="md-raised md-cornered md-primary" >Add Record</md-button> 
+							
+						</form>
+						
+					   
+					 </md-card-content>
+					 <md-card-footer>
+					   *upload respective media at respective location.
+					 </md-card-footer>
+					</md-card>
+			 </md-content>
+		  </md-tab>
+		  <md-tab label="Save Records" >
+		  	<h1 class="md-display-2 md-padding" layout="row" layout-align="start center">Save Records</h1>
+			<md-content class="md-padding" layout="column" layout-align="center center">
+			  
+					<md-card flex="50" ng-show="!isUserValid"  >
+						<md-card-content >
+						<form autocomplete="off"   ng-submit="getAccess();">
+								<md-input-container class="md-icon-float md-block">
+							      <label>User Name</label>
+							      <md-icon><i class="md-avatar fa fa-user" ng-style="{'font-size':'24px'}"></i></md-icon>
+							      <input ng-model="user.userName" type="text">
+							    </md-input-container>
+							
+							    <md-input-container md-no-float class="md-icon-float md-block">
+							    <label>Password</label>
+							      <md-icon ><i class="md-avatar fa fa-lock" ng-style="{'font-size':'24px'}"></i></md-icon>
+							      <input ng-model="user.passKey" type="password" >
+							    </md-input-container>
+							   
+						          <md-button type="submit" class="md-raised md-cornered md-primary">Login</md-button>
+						        
+						</form>
+						</md-card-content>
+					</md-card>
+					<md-card flex="50" ng-show="isUserValid"  >
+						<md-card-content >
+						<form autocomplete="off"   ng-submit="saveContain();">
+							   
+						          <md-button type="submit" class="md-raised md-cornered md-primary">Save</md-button>
+						        
+						</form>
+						</md-card-content>
+					</md-card>
+			 </md-content>
+		  </md-tab>
+		 
+	  </md-tabs>
+		
+	</md-content>
+	 
+</section>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" 
+integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+ <!-- Angular Material requires Angular.js Libraries -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-aria.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-messages.min.js"></script>
+
+  <!-- Angular Material Library -->
+<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.js"></script>
+<script type="text/javascript">
+var admin= angular.module("myAdmin",['ngMaterial','ngMessages']);
+
+admin.config(function($mdThemingProvider) {
+	
+	$mdThemingProvider.theme('dark-grey').backgroundPalette('grey').dark();
+	  $mdThemingProvider.theme('dark-orange').backgroundPalette('orange').dark();
+	  $mdThemingProvider.theme('dark-purple').backgroundPalette('deep-purple').dark();
+	  $mdThemingProvider.theme('dark-blue').backgroundPalette('blue').dark();
+});
+
+admin.controller('adminCtrl',function($rootScope,$scope,$http,$timeout, $mdSidenav, $log,$mdDialog){
+	
+	$scope.enableChip=false;
+	$scope.addedRecord=false;
+	$scope.deletedRecord=false;
+	$scope.editedRecord=false;
+	$scope.isUserValid=false;
+	$scope.user={};
+	$scope.dynamicModel={};
+	$scope.selectedTab=0;
+	$scope.data={};
+	 $http.get("https://github.com/nikhildinpure.github.io/GGData.json")
+	    .then(function(response) {
+	        //First function handles success
+	        console.log("get Response ");console.log(response.data);
+	       /*  $scope.data = JSON.parse(atob(response.data.content));
+	       	$scope.viewSelected($scope.data.adminMenu[0],0); 
+	        console.log("$scope.data ");
+	        console.log($scope.data); */
+	    }, function(response) {
+	        //Second function handles error
+	        $scope.data.error = "Something went wrong";
+	    });
+	
+	$scope.toggleLeft = function () {
+		  $mdSidenav('left').toggle()
+			.then(function () {
+			  $log.debug("close LEFT is done");
+			});
+	};
+
+	$scope.onSwipeRight = function(ev, target) {
+			$mdSidenav('left').open()
+			.then(function () {
+			  $log.debug("on right swipe Nav Open");
+			  $log.log('Event Target: ', ev.target);
+			  $log.log('Event Current Target: ', ev.currentTarget);
+			  $log.log('Original Current Target: ', target.current);
+			});
+	};
+	
+	$scope.credits="";
+	$scope.getAccess=function(){
+		console.log($scope.user.userName+":"+$scope.user.passKey);
+	   	$scope.credits=btoa($scope.user.userName+":"+$scope.user.passKey);
+	   	console.log($scope.credits);
+	    $http.get("https://api.github.com/user",
+				{ headers: {
+						'Authorization':'Basic '+ $scope.credits
+					 }
+				}
+		)
+	    .then(function(response) {
+	        console.log(response.data);
+	        $scope.isUserValid=true;
+	    }, function(response) {
+	    	 console.log(response);
+	    	 $scope.credits="";
+	    	 $scope.isUserValid=false;
+	    }); 
+	    
+	 
+	};
+	
+	$scope.saveContain=function(){
+		 $http.get("https://api.github.com/repos/nikhildinpure/nikhildinpure.github.io/contents/GGData.json",
+				 { headers: {
+						'Authorization':'Basic '+ btoa("nikhildinpure:Tomi1vijet@")
+						
+					 }
+				}
+		 )
+		    .then(function(response) {
+		        //First function handles success
+		        console.log("get Response ");console.log(response.data);
+		        $scope.data = JSON.parse(atob(response.data.content));
+		       	$scope.viewSelected($scope.data.adminMenu[0],0); 
+		        console.log("$scope.data ");
+		        console.log($scope.data);
+		    }, function(response) {
+		        //Second function handles error
+		        $scope.data.error = "Something went wrong";
+		    });
+		var commitObj={
+			  message: "",
+			  committer: {
+			    name: "Nikhil Inpure",
+			    email: "nikhildinpure@gmail.com"
+			  },
+			  content: ""
+			  
+		};
+		commitObj.message="without sha";
+		commitObj.content=btoa("Adding more Content in txt");
+		commitObj.sha="bacbf35448c724df9d2190aa8a98edbe86130a8a";
+		console.log(commitObj);
+		var reqData=btoa(commitObj);
+		$http.put("https://api.github.com/repos/nikhildinpure/nikhildinpure.github.io/contents/README.md",
+				commitObj,
+				{headers: {
+						'Authorization':'Basic '+ $scope.credits
+					 }
+				}
+				 )
+	    .then(function(response) {
+	        console.log(response.data);
+	        
+	    }, function(response) {
+	    	 console.log(response);
+	    }); 
+	}
+ 
+	$scope.viewSelected=function(menu,menuIndex){
+		$scope.dynamicModel={};
+		$scope.addedRecord=false;
+		$scope.deletedRecord=false;
+		$scope.editedRecord=false;
+		console.log("editedRecord "+$scope.editedRecord);
+		console.log("addedRecord "+$scope.addedRecord);
+		console.log("deletedRecord "+$scope.deletedRecord);
+		console.log("dynamicModel "+$scope.dynamicModel);
+		$scope.selectedMenu=menu;
+		$scope.selectedMenuIndex=menuIndex;
+		console.log("selectedMenuIndex "+$scope.selectedMenuIndex);
+		$scope.selectedTab=0;
+		$scope.activeMenu=menu.menuName;
+	
+		$scope.containList=[];
+	
+		var contain = menu.menuContain;
+		console.log("enableChip "+$scope.enableChip);
+		if(contain.length!=0){
+			$scope.enableChip=false;
+			console.log("enableChip "+$scope.enableChip);
+			$scope.headerList=[];
+			$scope.fieldList=[];
+			$scope.chipList=[];
+			for(var key in contain[0]){
+				var field=contain[0][key];
+				var fieldType=$scope.detectType(field);
+				console.log("fieldType "+fieldType);
+				if(fieldType=='[object Array]'){
+					$scope.enableChip=true;
+					console.log("enableChip "+$scope.enableChip);
+					$scope.chipList.push(key);
+				}else{
+					var fieldObj={};
+					fieldObj.fieldName=key;
+					fieldObj.fieldType=fieldType;
+					$scope.fieldList.push(fieldObj);
+				}
+				
+				$scope.headerList.push(key);
+			}
+			console.log("chipList "+$scope.chipList);
+			console.log("headerList "+$scope.headerList);
+			console.log("fieldList "+$scope.fieldList);
+		}
+		for(var i=0;i<contain.length;i++){
+			console.log("menuContain "+contain[i]);
+			var tempList=[];
+			for(var j=0;j<$scope.headerList.length;j++){
+				var tempContain=contain[i][$scope.headerList[j]];
+				tempList.push(tempContain);
+			}
+			console.log(tempList);
+			$scope.containList.push(tempList);
+			 
+		}
+		console.log($scope.containList);
+	}
+	
+	$scope.detectType=function(element){
+		return Object.prototype.toString.call(element);
+	}
+	
+	$scope.getKeys=function(obj){
+		var keyList=[];
+		for(var key in obj){
+			keyList.push(key);
+			console.log(key);
+		}
+		return keyList;
+	};
+	
+	$scope.addRecord=function(){
+		console.log($scope.dynamicModel);
+		
+		if((Object.keys($scope.dynamicModel).length === 0 && $scope.dynamicModel.constructor === Object)||$scope.addedRecord){
+			console.log("empty dynamicModel or rec added already");
+			return false;
+		}
+		
+		if($scope.editedRecord){
+			$scope.data.adminMenu[$scope.selectedMenuIndex].menuContain.splice($scope.editIndex, 1);
+			console.log("Deleted to update ");
+		}
+		
+		for(var i=0;i<$scope.chipList.length;i++){
+			var stringToSplit= $scope.dynamicModel[$scope.chipList[i]];
+			if(stringToSplit.indexOf('\n') !== -1 || stringToSplit.length>0){
+				var arrString=stringToSplit.split('\n');
+				$scope.dynamicModel[$scope.chipList[i]]=arrString;
+			}else {
+				$scope.dynamicModel[$scope.chipList[i]]=[];
+			}
+			
+		}
+		
+		console.log("updated dynamicModel"+$scope.dynamicModel);
+		
+		$scope.data.adminMenu[$scope.selectedMenuIndex].menuContain.push($scope.dynamicModel);
+		$scope.addedRecord=true;
+		console.log("added dynamicModel "+$scope.addedRecord);
+		$mdDialog.show(
+			  $mdDialog.alert()
+				.parent(angular.element(document.querySelector('#add')))
+				.clickOutsideToClose(true)
+				.title('Record Added Successfully!!')
+				.textContent('Visit View Record Tab, you might need to refresh records.')
+				.ariaLabel('Add')
+				.ok('Got it!')
+			);
+		$scope.viewSelected($scope.selectedMenu,$scope.selectedMenuIndex);
+	}
+
+	$scope.deleteRecord=function(index){
+		if($scope.deletedRecord){
+			console.log("deletedRecord "+$scope.deletedRecord);
+			return false;
+		}
+		var deleteRec = $mdDialog.confirm()
+							  .title('Would you like to delete this record?')
+							  .textContent('there is no Undo also make sure to save changes')
+							  .ariaLabel('Delete')
+							  .ok('Please do it!')
+							  .cancel('Cancel');
+		 $mdDialog.show(deleteRec).then(function() {
+				console.log("Delete present at "+index);
+				console.log("selectedMenuIndex "+$scope.selectedMenuIndex);
+				console.log($scope.data.adminMenu[$scope.selectedMenuIndex].menuContain[index] );
+				
+				$scope.data.adminMenu[$scope.selectedMenuIndex].menuContain.splice(index, 1);
+				console.log("Deleted ");
+				$scope.deletedRecord=true;
+				$scope.viewSelected($scope.selectedMenu,$scope.selectedMenuIndex);
+			}, function() {
+				return false;
+			});
+		
+	};
+	
+	$scope.resetMode=function(){
+		$scope.editedRecord=false;
+		$scope.dynamicModel={};
+		console.log('Mode Resetted '+$scope.editedRecord);
+		console.log($scope.dynamicModel);
+	}
+	
+	$scope.editRecord=function(index){
+		$scope.editIndex=index;
+		var editObj=$scope.data.adminMenu[$scope.selectedMenuIndex].menuContain[index];
+		for(var n=0;n<$scope.headerList.length;n++){
+			var tempObj=editObj[$scope.headerList[n]];
+			var type=$scope.detectType(tempObj);
+			if(type=='[object Array]'){
+				var tempStr='';
+				for(var m=0;m<tempObj.length;m++){
+					tempStr=tempStr+tempObj[m]+'\n';
+				}
+				tempObj=tempStr;
+			}
+			
+			$scope.dynamicModel[$scope.headerList[n]]=tempObj;
+		}
+		console.log("Object loaded to Edit ");
+		console.log($scope.dynamicModel);
+		$scope.selectedTab=1;
+		$scope.editedRecord=true;
+		
+	}
+	
+	$scope.saveDownload=function(){
+			var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify($scope.data));
+			var downloadAnchorNode = document.createElement('a');
+			downloadAnchorNode.setAttribute("href",     dataStr);
+			downloadAnchorNode.setAttribute("download", 'GGData' + ".json");
+			document.body.appendChild(downloadAnchorNode); // required for firefox
+			downloadAnchorNode.click();
+			downloadAnchorNode.remove();
+	};
+
+
+
+
+});
+
+
+</script>
+</body>
+
+</html>
