@@ -243,7 +243,7 @@ admin.controller('adminCtrl',function($rootScope,$scope,$http,$timeout, $mdSiden
 	$scope.dynamicModel={};
 	$scope.selectedTab=0;
 	$scope.data={};
-	 $http.get("https://github.com/nikhildinpure.github.io/GGData.json")
+	 $http.get("GGData.json")
 	    .then(function(response) {
 	        //First function handles success
 	        console.log("get Response ");console.log(response.data);
