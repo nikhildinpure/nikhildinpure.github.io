@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+  <link href="./css/custom-style.css" rel="stylesheet">
+
+  <title>Nikhil Inpure</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg theme-nav">
+    <div class="container-fluid">
+      <ul class="social-list list-inline mb-0">
+          <li class="list-inline-item"><a href="https://in.linkedin.com/" class="text-white" href="#"><svg class="svg-inline--fa fa-linkedin-in fa-w-14 fa-fw" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="linkedin-in" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"></path></svg><!-- <i class="fab fa-linkedin-in fa-fw"></i> Font Awesome fontawesome.com --></a></li>
+          <li class="list-inline-item"><a href="https://github.com/nikhildinpure" class="text-white" href="#"><svg class="svg-inline--fa fa-github-alt fa-w-15 fa-fw" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="github-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512" data-fa-i2svg=""><path fill="currentColor" d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"></path></svg></a></li>
+          <li class="list-inline-item"><a href="#" class="text-white" href="#" onclick="changeThemeColor()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M283.211 512c78.962 0 151.079-35.925 198.857-94.792 7.068-8.708-.639-21.43-11.562-19.35-124.203 23.654-238.262-71.576-238.262-196.954 0-72.222 38.662-138.635 101.498-174.394 9.686-5.512 7.25-20.197-3.756-22.23A258.156 258.156 0 0 0 283.211 0c-141.309 0-256 114.511-256 256 0 141.309 114.511 256 256 256z" style="fill:white"/></svg></a></li>
+      </ul>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
+        aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse text-uppercase" id="navbarTogglerDemo02">
+        <ul class="navbar-nav  " style="margin-left: auto !important;">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#about">About&nbsp;</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#skills">Skills&nbsp;</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="#projects">Projects&nbsp;</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="/docs/resume.html">Resume&nbsp;</a>
+           
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="#contact">&nbsp;Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+   <!--about-->
+  <div class="pad-about theme-bg" id="about">
+    <div class="container ">
+      <div class="row justify-content-center ">
+        <div class="col-12 col-md-auto text-center text-md-start">
+          <img class="profile-image mb-3 mb-lg-0 ms-md-0 rounded mx-auto img-fluid rounded-circle" src="./img/profile.jpg" alt="profile pic">
+        </div>
+        <div class="col text-center text-md-start">
+          <div class="lead">Hello, my name is</div>
+          <h2 class="mt-0 display-4"><strong>Nikhil Inpure</strong> </h2>
+          <div class="bio mb-3">Having <strong>more than 4.7 years of experience</strong> in front end and backend
+            development with sharp focus on quality and perfection.
+            As enthusiast in coding and development technologies, always looking forward to learning and implementing
+            new ways to
+            increase productivity. Looking for opportunities that would allow me to explore different frontiers of
+            software development.</div>
+      <button class="theme-btn-on-bg btn font-weight-bold theme-btn-cta" href="">Technology Analyst</button> 
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--about-->
+   <!--skills-->
+  <div class="pad-about bg-skill" >
+    <div class="container ">
+      <div class="row justify-content-center  text-center " id="skills">
+        <div class="col-12 col-md-2"></div>
+        <div class="col-12 col-md-8">
+          <h4>Skills Overview</h4>
+          <div class="bio mb-3">I have 1.5 years onsite experience and more than 4.7 years of total experience in building rich web applications as well as hybrid app development. Below is a
+            quick overview of my main technical skill sets and tools I use. </div>
+
+        </div>
+        <div class="col-12 col-md-2"></div>
+      </div>
+      <br> <br>
+      <div class="row justify-content-center ">
+        <div class="col-12 col-md-4 card-group">
+          <div class="card slideanim" >
+            <div class="theme-bg icon-parent"><span class="skill-icon-pos front-icon"></span></div>
+            <br>
+            <div class="card-body">
+              <h5 class="card-title text-center">Frontend</h5>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item no-borders">
+                  <img src="./img/check.svg" class="img-fluid tick-icon" >HTML5/CSS3 
+                  <rate-skill stars="4"></rate-skill></li>
+                  <li class="list-group-item no-borders">
+                    <img src="./img/check.svg" class="img-fluid tick-icon" >Bootstrap
+                    <rate-skill stars="3"></rate-skill></li>
+                <li class="list-group-item no-borders">
+                  <img src="./img/check.svg" class="img-fluid tick-icon" >AngularJS
+                  <rate-skill stars="4"></rate-skill></li>
+                <li class="list-group-item no-borders">
+                  <img src="./img/check.svg" class="img-fluid tick-icon" >Javascript
+                  <rate-skill stars="4"></rate-skill></li>
+                <li class="list-group-item no-borders">
+                  <img src="./img/check.svg" class="img-fluid tick-icon" >Angular
+                  <rate-skill stars="3"></rate-skill></li>
+                <li class="list-group-item no-borders">
+                  <img src="./img/check.svg" class="img-fluid tick-icon" >Apache Cordova
+                  <rate-skill stars="2"></rate-skill></li>
+                <li class="list-group-item no-borders">
+                  <img src="./img/check.svg" class="img-fluid tick-icon" >Android
+                  <rate-skill stars="2"></rate-skill></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4 card-group">
+          <div class="card slideanim" >
+            <div class="theme-bg icon-parent" ><span class="skill-icon-pos back-icon"></span></div>
+            <br>
+            <div class="card-body">
+              <h5 class="card-title text-center">Backend</h5>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item no-borders">
+                  <img src="./img/check.svg" class="img-fluid tick-icon" >Core Java
+                  <rate-skill stars="4"></rate-skill></li>
+                <li class="list-group-item no-borders">
+                  <img src="./img/check.svg" class="img-fluid tick-icon" >IBM MobileFirst 7.1/8
+                  <rate-skill stars="3"></rate-skill></li>
+                <li class="list-group-item no-borders">
+                  <img src="./img/check.svg" class="img-fluid tick-icon" >Oracle SQL
+                  <rate-skill stars="3"></rate-skill></li>
+                <li class="list-group-item no-borders">
+                  <img src="./img/check.svg" class="img-fluid tick-icon" >NodeJS
+                  <rate-skill stars="2"></rate-skill></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4 card-group">
+          <div class="card slideanim" >
+            <div class="theme-bg icon-parent"><span class="skill-icon-pos tools-icon "></span></div>
+            <br>
+            <div class="card-body">
+              <h5 class="card-title text-center">Tools</h5>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item no-borders">
+                  <img src="./img/check.svg" class="img-fluid tick-icon" >Chrome Dev-Tools
+                  <rate-skill stars="4"></rate-skill></li>
+                <li class="list-group-item no-borders">
+                  <img src="./img/check.svg" class="img-fluid tick-icon" >Eclipse IDE
+                  <rate-skill stars="4"></rate-skill></li>
+                <li class="list-group-item no-borders">
+                  <img src="./img/check.svg" class="img-fluid tick-icon" >Android Studio
+                  <rate-skill stars="2"></rate-skill></li>
+                <li class="list-group-item no-borders">
+                  <img src="./img/check.svg" class="img-fluid tick-icon" >SQL Developer
+                  <rate-skill stars="3"></rate-skill></li>
+                <li class="list-group-item no-borders">
+                  <img src="./img/check.svg" class="img-fluid tick-icon" >JMeter
+                  <rate-skill stars="2"></rate-skill></li>
+                <li class="list-group-item no-borders">
+                  <img src="./img/check.svg" class="img-fluid tick-icon" >Putty(UNIX)/WinSCP
+                  <rate-skill stars="4"></rate-skill></li>
+                <li class="list-group-item no-borders">
+                  <img src="./img/check.svg" class="img-fluid tick-icon" >Github/Tortoise SVN
+                  <rate-skill stars="4"></rate-skill></li>
+                <li class="list-group-item no-borders">
+                  <img src="./img/check.svg" class="img-fluid tick-icon" >Postman/ SOAP UI
+                  <rate-skill stars="2"></rate-skill></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!--skills-->
+  <!-- projects-->
+  <div class="pad-about" id="projects">
+    <div class="container ">
+      <div class="row justify-content-center  text-center ">
+        <div class="col-12 col-md-2"></div>
+        <div class="col-12 col-md-8">
+          <h4>Projects I've worked on</h4>
+          <div class="bio mb-3">I was part of 2 Major and 1 small go-lives where I supported live
+            application as well as client’s technical and customer care team. I have
+            maintain and manage UAT environments as well as managed production releases </div>
+
+        </div>
+        <div class="col-12 col-md-2"></div>
+      </div>
+      <br> 
+      <div class="row justify-content-center ">
+
+        <div class="accordion " id="accordionPanelsStayOpenExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                Mobile Banking Solutions
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne" data-bs-parent="accordionPanelsStayOpenExample">
+              <div class="accordion-body">
+                <div class="card mb-3" >
+                  <div class="row g-0">
+                    <div class="col-md-4">
+                      <img src="./img/finacle.png" class="img-fluid " alt="..." style="width: 100%;"> 
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card-body">
+                        <h5 class="card-title"><strong>Domain</strong> : Finance </h5>
+                        <p class="card-text"><small class="text-muted">Pune | 2017-2019</small> </p>
+                        <p class="card-text">
+                          Developed UI with HTML, CSS3, AngularJS Material technologies
+      and Implemented front end business logic and validations using
+      AngularJS, JavaScript adhering to product configuration files with
+      the help of Android Studio and Chrome Dev-Tool.
+                        </p>
+                       <p class="card-text">
+                        Having exposure of Hybrid app development using Cordova and
+IBM MobileFirst Platform.
+                       </p>
+                       <p class="card-text">
+                        Consumed Middleware XML type services and implemented
+                        business logic with Core Java using eclipse while adhering to
+                        Product’s configuration framework in mobile banking server backend.
+                       </p>
+                       <p class="card-text">
+                        Worked within Agile team and helped prioritize and scope feature
+                        requests to ensure that biggest impact features were worked on
+                        first
+                       </p>
+                      </div>
+                      <div class="card-footer">
+                        <h6>
+                          <span class="badge theme-nav">AngularJS</span>
+                          <span class="badge theme-nav">AngularJS Material</span>
+                          <span class="badge theme-nav">Java</span>
+                          <span class="badge theme-nav">IBM MFP</span>
+                          <span class="badge theme-nav">Apache Cordova</span>
+                          <span class="badge theme-nav">Android</span>
+                        </h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                Mobile Banking Solutions (On-Site)
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo" data-bs-parent="accordionPanelsStayOpenExample">
+              <div class="accordion-body">
+                <div class="card mb-3" >
+                  <div class="row g-0">
+                    <div class="col-md-4">
+                      <img src="./img/finacle-dark.png" class="img-fluid " alt="..." style="width: 100%;height: 100%;"> 
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card-body">
+                        <h5 class="card-title"><strong>Domain</strong> : Finance </h5>
+                        <p class="card-text"><small class="text-muted">Muscat | 2019-Apr 2021</small> </p>
+                        <p class="card-text">
+                          I managed defect closing and delivered test environment
+releases corresponding to bug-fixes along with inline new
+development items.
+                        </p>
+                       <p class="card-text">
+                        Planned and executed end to end releases of Production
+application which includes App builds, server patches and builds
+and their deployment.
+                       </p>
+                       <p class="card-text">
+                        Configured and administered runtime adapters, applications,
+                        devices, transactions, security, and push notifications using IBM
+                        MFP (v7.1 and v8.0)
+                        
+                       </p>
+                       
+                       <p class="card-text">
+                        Having exposure to firebase push notification system as well as
+                        MobileFirst server’s REST API based push notification service.
+                       </p>
+                       <p class="card-text">
+                        Integrated Third Party SDKs in app using Android studio.
+                       </p>
+                      </div>
+                      <div class="card-footer">
+                        <h6>
+                          <span class="badge theme-nav">Java</span>
+                          <span class="badge theme-nav">NodeJS</span>
+                          <span class="badge theme-nav">ORACLE SQL</span>
+                          <span class="badge theme-nav">IBM MFP 7.1/8</span>
+                          <span class="badge theme-nav">JMeter</span>
+                          <span class="badge theme-nav">Putty/winscp/MobaXterm</span>
+                          <span class="badge theme-nav">SOAP UI/Postman</span>
+                        </h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                PR website for Education Institute - Freelancing Work
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree" data-bs-parent="accordionPanelsStayOpenExample">
+              <div class="accordion-body">
+                <div class="card mb-3" >
+                  <div class="row g-0">
+                    <div class="col-md-4">
+                      <img src="./img/freelance.jpg" class="img-fluid " alt="..." style="width: 75%;"> 
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card-body">
+                        <h5 class="card-title"><strong>Domain</strong> : Education </h5>
+                        <p class="card-text"><small class="text-muted">Mumbai | Aug 2016 - Nov 2016</small> </p>
+                        <p class="card-text">
+                          Designed responsive and Dynamic UI using HTML, Bootstrap, CSS,
+                          JS, jQuery with the help of Chrome Dev-Tool and integrated third party
+                          Videos, Forms, Links
+                        </p>
+                       <p class="card-text">
+                        Created Admin dashboard to manage content of page.
+                       </p>
+                       <p class="card-text">
+                        Performed unit testing and deployed using Hosting Platform
+                        
+                       </p>
+                      </div>
+                      <div class="card-footer">
+                        <h6>
+                          <span class="badge theme-nav">HTML/CSS</span>
+                          <span class="badge theme-nav">Bootstrap</span>
+                          <span class="badge theme-nav">JavaScript/JQuery</span>
+                          <span class="badge theme-nav">Github</span>
+                        </h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+   <!-- projects-->
+   <!--contact-->
+   <div class="pad-about theme-bg" id="contact">
+    <div class="container ">
+      <div class="row justify-content-center ">
+        <div class="text-center">
+			    <img class="profile-small d-inline-block mx-auto rounded-circle mb-2 slideanim" src="./img/profile.jpg" alt="">
+          <h3 class=" text-center mb-2">Interested in hiring me for your Organisation?</h3>
+          <div class="mx-auto text-center mb-3">
+            Looking for an experienced full-stack developer? To start an initial chat, just drop me an email at <em>nikhildinpure@gmail.com</em> .
+          </div>
+          <div class="text-center slideanim">
+		        <a class="theme-nav btn " href="./docs/NikhilInpureResume.pdf" download>Download Resume</a>
+		    </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+   <!--contact-->
+   <footer class="footer text-light text-center py-2">
+    <small class="copyright">Made with Bootstrap 5, Copyright © <a class="text-light text-link" href="https://nikhildinpure.github.io/" target="_blank">Nikhil Inpure</a></small>
+  </footer>
+  </div>
+  </div>
+  </div>
+
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+    crossorigin="anonymous"></script>
+    <script src="./js/rating.js"></script>
+    <script src="./js/smoothScroll.js"></script>
+    <script src="./js/custom.js"></script>
+
+</body>
+
+</html>
